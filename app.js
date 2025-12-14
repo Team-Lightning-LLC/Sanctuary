@@ -283,64 +283,117 @@ const AudioPlayer = {
   isPlaying: false,
 
   init() {
-    this.loadYouTubeAPI();
+    console.log('AudioPlayer: initializing...');
     
     const toggle = document.getElementById('audio-toggle');
     const volume = document.getElementById('audio-volume');
-    const container = document.getElementById('audio-player');
 
-    toggle?.addEventListener('click', () => this.toggle());
+    toggle?.addEventListener('click', () => {
+      console.log('AudioPlayer: toggle clicked, isReady:', this.isReady);
+      this.toggle();
+    });
+    
     volume?.addEventListener('input', (e) => this.setVolume(parseInt(e.target.value)));
+
+    this.loadYouTubeAPI();
   },
 
   loadYouTubeAPI() {
-    if (window.YT) {
+    // Check if already loaded
+    if (window.YT && window.YT.Player) {
+      console.log('AudioPlayer: YT API already loaded');
       this.createPlayer();
       return;
     }
 
+    console.log('AudioPlayer: loading YT API...');
+    
     const tag = document.createElement('script');
     tag.src = 'https://www.youtube.com/iframe_api';
+    tag.onerror = () => console.error('AudioPlayer: failed to load YT API');
     document.head.appendChild(tag);
 
-    window.onYouTubeIframeAPIReady = () => this.createPlayer();
+    // YouTube API calls this globally when ready
+    window.onYouTubeIframeAPIReady = () => {
+      console.log('AudioPlayer: YT API ready');
+      this.createPlayer();
+    };
   },
 
   createPlayer() {
-    this.player = new YT.Player('youtube-container', {
-      height: '0',
-      width: '0',
-      videoId: CONFIG.audio.youtubeVideoId,
-      playerVars: {
-        autoplay: 0,
-        loop: 1,
-        playlist: CONFIG.audio.youtubeVideoId
-      },
-      events: {
-        onReady: () => {
-          this.isReady = true;
-          this.player.setVolume(CONFIG.audio.defaultVolume);
+    const container = document.getElementById('youtube-container');
+    if (!container) {
+      console.error('AudioPlayer: youtube-container not found');
+      return;
+    }
+
+    console.log('AudioPlayer: creating player...');
+
+    try {
+      this.player = new YT.Player('youtube-container', {
+        height: '1',
+        width: '1',
+        videoId: CONFIG.audio.youtubeVideoId,
+        playerVars: {
+          autoplay: 0,
+          controls: 0,
+          disablekb: 1,
+          fs: 0,
+          loop: 1,
+          modestbranding: 1,
+          playsinline: 1,
+          rel: 0,
+          playlist: CONFIG.audio.youtubeVideoId
         },
-        onStateChange: (e) => {
-          this.isPlaying = e.data === YT.PlayerState.PLAYING;
-          document.getElementById('audio-player')?.classList.toggle('playing', this.isPlaying);
+        events: {
+          onReady: (event) => {
+            console.log('AudioPlayer: player ready');
+            this.isReady = true;
+            this.player.setVolume(CONFIG.audio.defaultVolume);
+            document.getElementById('audio-toggle').textContent = '▷';
+          },
+          onStateChange: (event) => {
+            console.log('AudioPlayer: state changed to', event.data);
+            this.isPlaying = event.data === YT.PlayerState.PLAYING;
+            const playerEl = document.getElementById('audio-player');
+            const toggleEl = document.getElementById('audio-toggle');
+            
+            playerEl?.classList.toggle('playing', this.isPlaying);
+            if (toggleEl) {
+              toggleEl.textContent = this.isPlaying ? '❚❚' : '▷';
+            }
+          },
+          onError: (event) => {
+            console.error('AudioPlayer: error', event.data);
+          }
         }
-      }
-    });
+      });
+    } catch (err) {
+      console.error('AudioPlayer: failed to create player', err);
+    }
   },
 
   toggle() {
-    if (!this.isReady) return;
+    if (!this.isReady) {
+      console.log('AudioPlayer: not ready yet');
+      return;
+    }
     
-    if (this.isPlaying) {
-      this.player.pauseVideo();
-    } else {
-      this.player.playVideo();
+    try {
+      if (this.isPlaying) {
+        console.log('AudioPlayer: pausing');
+        this.player.pauseVideo();
+      } else {
+        console.log('AudioPlayer: playing');
+        this.player.playVideo();
+      }
+    } catch (err) {
+      console.error('AudioPlayer: toggle error', err);
     }
   },
 
   setVolume(val) {
-    if (this.isReady) {
+    if (this.isReady && this.player) {
       this.player.setVolume(val);
     }
   }
