@@ -67,13 +67,13 @@
 
   <!-- Audio Player -->
   <div id="audio-player" class="audio-player">
-    <button id="audio-toggle" class="audio-toggle">◦</button>
+    <button id="audio-toggle" class="audio-toggle">▷</button>
     <input type="range" id="audio-volume" class="audio-volume" min="0" max="100" value="25">
     <span class="audio-label">小久保隆 — 風のオアシス II</span>
   </div>
 
-  <!-- YouTube Container (hidden) -->
-  <div id="youtube-container" style="position:absolute;left:-9999px;"></div>
+  <!-- YouTube Container (hidden but functional) -->
+  <div id="youtube-container" style="position:fixed; bottom:0; right:0; width:1px; height:1px; opacity:0.01; pointer-events:none;"></div>
 
   <!-- Scripts -->
   <script src="config.js"></script>
