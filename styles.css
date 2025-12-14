@@ -1,0 +1,453 @@
+/* ========================================
+   SANCTUARY — Light Ukiyo-e Aesthetic
+   Floating, peaceful, single screen
+   ======================================== */
+
+:root {
+  /* Light palette - ukiyo-e inspired */
+  --cream: #f7f5f0;
+  --cream-dark: #e8e4db;
+  --ink: #2a2a28;
+  --ink-light: #4a4a46;
+  --ink-muted: #8a8a84;
+  --water: #7eb8a8;
+  --water-light: #a8d4c8;
+  --water-pale: #d4ebe5;
+  --water-dark: #5a9a8a;
+  
+  /* Typography */
+  --font: 'Noto Serif', Georgia, serif;
+  
+  /* Transitions */
+  --slow: 800ms ease;
+  --normal: 400ms ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden; /* No scroll */
+}
+
+body {
+  font-family: var(--font);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--cream);
+}
+
+/* ========================================
+   Wave Pattern Background
+   ======================================== */
+
+.wave-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.08;
+  background-color: var(--cream);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Cpath fill='none' stroke='%235a9a8a' stroke-width='1' d='M0 50 Q50 30 100 50 T200 50 T300 50 T400 50 M0 100 Q50 80 100 100 T200 100 T300 100 T400 100 M0 150 Q50 130 100 150 T200 150 T300 150 T400 150 M0 200 Q50 180 100 200 T200 200 T300 200 T400 200 M0 250 Q50 230 100 250 T200 250 T300 250 T400 250 M0 300 Q50 280 100 300 T200 300 T300 300 T400 300 M0 350 Q50 330 100 350 T200 350 T300 350 T400 350 M0 400 Q50 380 100 400 T200 400 T300 400 T400 400'/%3E%3C/svg%3E");
+  background-size: 300px 300px;
+  animation: waveShift 60s linear infinite;
+}
+
+@keyframes waveShift {
+  0% { background-position: 0 0; }
+  100% { background-position: 300px 150px; }
+}
+
+/* ========================================
+   Main Layout - Single Screen
+   ======================================== */
+
+.sanctuary {
+  position: relative;
+  z-index: 1;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 40px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* ========================================
+   Wisdom Banner
+   ======================================== */
+
+.wisdom-banner {
+  text-align: center;
+  padding: 16px 0;
+  min-height: 50px;
+}
+
+.wisdom-text {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--ink-muted);
+  letter-spacing: 0.02em;
+  opacity: 0;
+  transition: opacity 2s ease;
+}
+
+.wisdom-text.visible {
+  opacity: 1;
+}
+
+/* ========================================
+   Hero Section
+   ======================================== */
+
+.hero {
+  text-align: center;
+  padding: 30px 0 20px;
+}
+
+.site-title {
+  font-size: 2.8rem;
+  font-weight: 300;
+  letter-spacing: 0.3em;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.site-subtitle {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--ink-muted);
+  letter-spacing: 0.1em;
+}
+
+/* ========================================
+   Library Section
+   ======================================== */
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.library {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 20px 0;
+}
+
+.library-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--cream-dark);
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  color: var(--ink-muted);
+  text-transform: lowercase;
+}
+
+.wander-btn {
+  font-family: var(--font);
+  font-size: 0.8rem;
+  color: var(--ink-muted);
+  background: none;
+  border: 1px solid var(--cream-dark);
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: all var(--normal);
+}
+
+.wander-btn:hover {
+  color: var(--water-dark);
+  border-color: var(--water);
+}
+
+/* Document List - Scrollable if needed */
+.document-list {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+.document-item {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+  cursor: pointer;
+  transition: all var(--normal);
+}
+
+.document-item:hover {
+  padding-left: 10px;
+}
+
+.document-item:hover .document-title {
+  color: var(--water-dark);
+}
+
+.document-title {
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--ink-light);
+  transition: color var(--normal);
+}
+
+.document-list-empty {
+  text-align: center;
+  padding: 40px;
+  color: var(--ink-muted);
+  font-style: italic;
+}
+
+/* Custom Scrollbar */
+.document-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.document-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.document-list::-webkit-scrollbar-thumb {
+  background: var(--water-light);
+  border-radius: 2px;
+}
+
+/* ========================================
+   Footer
+   ======================================== */
+
+.footer {
+  text-align: center;
+  padding: 16px 0;
+  font-size: 0.8rem;
+  color: var(--ink-muted);
+}
+
+/* ========================================
+   Document Viewer Modal
+   ======================================== */
+
+.viewer-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(247, 245, 240, 0.95);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--slow);
+}
+
+.viewer-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.viewer-modal {
+  width: 100%;
+  max-width: 700px;
+  max-height: 80vh;
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  transform: translateY(20px);
+  transition: transform var(--slow);
+}
+
+.viewer-overlay.open .viewer-modal {
+  transform: translateY(0);
+}
+
+.viewer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--cream-dark);
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+}
+
+.viewer-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--ink-muted);
+  cursor: pointer;
+  line-height: 1;
+  padding: 0 4px;
+}
+
+.viewer-close:hover {
+  color: var(--ink);
+}
+
+.viewer-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 32px;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.viewer-content h1 {
+  font-size: 1.6rem;
+  font-weight: 400;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--cream-dark);
+}
+
+.viewer-content h2 {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-top: 32px;
+  margin-bottom: 12px;
+  color: var(--ink);
+}
+
+.viewer-content h3 {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-top: 24px;
+  margin-bottom: 8px;
+  color: var(--water-dark);
+}
+
+.viewer-content p {
+  margin-bottom: 16px;
+}
+
+.viewer-content blockquote {
+  margin: 20px 0;
+  padding: 16px 24px;
+  border-left: 2px solid var(--water);
+  background: var(--cream);
+  font-style: italic;
+}
+
+.viewer-loading {
+  text-align: center;
+  padding: 60px;
+  color: var(--ink-muted);
+}
+
+/* ========================================
+   Audio Player
+   ======================================== */
+
+.audio-player {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: rgba(255,255,255,0.9);
+  border: 1px solid var(--cream-dark);
+  border-radius: 20px;
+  max-width: 40px;
+  overflow: hidden;
+  transition: all var(--normal);
+}
+
+.audio-player:hover {
+  max-width: 280px;
+}
+
+.audio-toggle {
+  width: 24px;
+  height: 24px;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  color: var(--ink-muted);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.audio-player.playing .audio-toggle {
+  color: var(--water-dark);
+}
+
+.audio-volume {
+  width: 60px;
+  height: 2px;
+  -webkit-appearance: none;
+  background: var(--cream-dark);
+  border-radius: 1px;
+  opacity: 0;
+  transition: opacity var(--normal);
+}
+
+.audio-player:hover .audio-volume {
+  opacity: 1;
+}
+
+.audio-volume::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 10px;
+  height: 10px;
+  background: var(--water);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.audio-label {
+  font-size: 0.7rem;
+  color: var(--ink-muted);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity var(--normal);
+}
+
+.audio-player:hover .audio-label {
+  opacity: 1;
+}
+
+/* ========================================
+   Animations
+   ======================================== */
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.document-item {
+  animation: fadeIn 0.6s ease forwards;
+  opacity: 0;
+}
+
+.document-item:nth-child(1) { animation-delay: 0.1s; }
+.document-item:nth-child(2) { animation-delay: 0.15s; }
+.document-item:nth-child(3) { animation-delay: 0.2s; }
+.document-item:nth-child(4) { animation-delay: 0.25s; }
+.document-item:nth-child(5) { animation-delay: 0.3s; }
+.document-item:nth-child(6) { animation-delay: 0.35s; }
+.document-item:nth-child(7) { animation-delay: 0.4s; }
+.document-item:nth-child(8) { animation-delay: 0.45s; }
+.document-item:nth-child(9) { animation-delay: 0.5s; }
+.document-item:nth-child(10) { animation-delay: 0.55s; }
