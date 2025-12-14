@@ -6,8 +6,8 @@ const CONFIG = {
   // Vertesia API
   api: {
     baseUrl: 'https://api.vertesia.io/api/v1',
-    apiKey: '', // ADD YOUR API KEY HERE
-    environmentId: '', // ADD YOUR ENVIRONMENT ID HERE
+    apiKey: 'sk-1ac1f7c9966cbc6782c78f747ab849cb', // ADD YOUR API KEY HERE
+    environmentId: '681915c6a01fb262a410c161', // ADD YOUR ENVIRONMENT ID HERE
   },
 
   // Wisdom - cycles every 5 minutes
