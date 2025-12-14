@@ -34,7 +34,6 @@ const CONFIG = {
 
   // Audio
   audio: {
-    youtubeVideoId: 'p3lVE5SH5kQ',
-    defaultVolume: 25
+    defaultVolume: 25  // 0-100
   }
 };
