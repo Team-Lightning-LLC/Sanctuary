@@ -1,0 +1,127 @@
+/* ========================================
+   Audio Player
+   Subtle, unobtrusive presence
+   ======================================== */
+
+.audio-player {
+  position: fixed;
+  bottom: var(--space-lg);
+  right: var(--space-lg);
+  z-index: var(--z-audio);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background: rgba(26, 28, 26, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(142, 196, 176, 0.06);
+  
+  /* Collapsed by default */
+  max-width: 44px;
+  overflow: hidden;
+  transition: all var(--transition-slow);
+}
+
+.audio-player:hover,
+.audio-player.expanded {
+  max-width: 280px;
+}
+
+/* Toggle button */
+.audio-toggle {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: all var(--transition-normal);
+}
+
+.audio-icon {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  transition: color var(--transition-normal);
+}
+
+.audio-player.playing .audio-icon {
+  color: var(--water-mid);
+}
+
+.audio-player.muted .audio-icon {
+  opacity: 0.3;
+}
+
+/* Volume slider */
+.audio-volume {
+  width: 60px;
+  height: 2px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: rgba(245, 243, 238, 0.15);
+  border-radius: 1px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.audio-player:hover .audio-volume,
+.audio-player.expanded .audio-volume {
+  opacity: 1;
+}
+
+.audio-volume::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  background: var(--water-mid);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform var(--transition-fast);
+}
+
+.audio-volume::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.audio-volume::-moz-range-thumb {
+  width: 10px;
+  height: 10px;
+  background: var(--water-mid);
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+}
+
+/* Label */
+.audio-label {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.audio-player:hover .audio-label,
+.audio-player.expanded .audio-label {
+  opacity: 0.6;
+}
+
+/* Loading state */
+.audio-player.loading .audio-icon {
+  animation: spin 1.5s linear infinite;
+}
+
+/* Error state */
+.audio-player.error .audio-icon {
+  color: var(--text-muted);
+  opacity: 0.3;
+}

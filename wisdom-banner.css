@@ -1,0 +1,55 @@
+/* ========================================
+   Wisdom Banner
+   Quiet flow of contemplation
+   ======================================== */
+
+.wisdom-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-header);
+  background: linear-gradient(
+    180deg,
+    rgba(26, 28, 26, 0.98) 0%,
+    rgba(26, 28, 26, 0.85) 60%,
+    transparent 100%
+  );
+  padding: var(--space-lg) var(--space-xl);
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wisdom-content {
+  max-width: 600px;
+  text-align: center;
+}
+
+.wisdom-text {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  letter-spacing: 0.03em;
+  line-height: 1.6;
+  display: inline-block;
+  
+  /* Fade transition */
+  opacity: 0;
+  transform: translateY(4px);
+  transition: 
+    opacity 2s ease,
+    transform 2s ease;
+}
+
+.wisdom-text.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.wisdom-text.fading {
+  opacity: 0;
+  transform: translateY(-4px);
+}

@@ -1,0 +1,284 @@
+/* ========================================
+   Ambient Background
+   Abstract, flowing, zen-like
+   Soft geometric forms, clouds, wind, water
+   ======================================== */
+
+.ambient-bg {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-ambient);
+  overflow: hidden;
+  background: var(--bg-primary);
+}
+
+/* ========================================
+   Flowing Gradient Base
+   ======================================== */
+
+.ambient-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(
+      ellipse 80% 50% at 20% 80%,
+      rgba(42, 90, 74, 0.12) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse 60% 40% at 80% 20%,
+      rgba(90, 158, 138, 0.08) 0%,
+      transparent 45%
+    );
+  animation: ambientShift 60s ease-in-out infinite;
+}
+
+@keyframes ambientShift {
+  0%, 100% {
+    opacity: 0.8;
+    transform: scale(1) rotate(0deg);
+  }
+  33% {
+    opacity: 1;
+    transform: scale(1.02) rotate(0.5deg);
+  }
+  66% {
+    opacity: 0.7;
+    transform: scale(0.98) rotate(-0.3deg);
+  }
+}
+
+/* ========================================
+   Drifting Forms — Abstract clouds/wind
+   ======================================== */
+
+.ambient-form {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0;
+  animation: drift 80s ease-in-out infinite;
+}
+
+/* Large slow form */
+.ambient-form-1 {
+  width: 600px;
+  height: 300px;
+  background: radial-gradient(
+    ellipse,
+    rgba(90, 158, 138, 0.15) 0%,
+    rgba(42, 90, 74, 0.05) 50%,
+    transparent 70%
+  );
+  top: -100px;
+  left: -200px;
+  animation-duration: 120s;
+  animation-delay: 0s;
+}
+
+/* Medium drifting form */
+.ambient-form-2 {
+  width: 400px;
+  height: 250px;
+  background: radial-gradient(
+    ellipse,
+    rgba(142, 196, 176, 0.1) 0%,
+    transparent 60%
+  );
+  bottom: 10%;
+  right: -100px;
+  animation-duration: 90s;
+  animation-delay: -30s;
+}
+
+/* Small accent form */
+.ambient-form-3 {
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(
+    circle,
+    rgba(232, 197, 71, 0.06) 0%,
+    transparent 50%
+  );
+  top: 40%;
+  left: 30%;
+  animation-duration: 100s;
+  animation-delay: -60s;
+}
+
+/* Ethereal mist form */
+.ambient-form-4 {
+  width: 500px;
+  height: 150px;
+  background: radial-gradient(
+    ellipse,
+    rgba(245, 243, 238, 0.03) 0%,
+    transparent 60%
+  );
+  top: 60%;
+  left: -50px;
+  animation-duration: 150s;
+  animation-delay: -45s;
+}
+
+@keyframes drift {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0.8);
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    transform: translate(100px, 50px) scale(1.1);
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(200px, 100px) scale(0.9);
+  }
+}
+
+/* ========================================
+   Flowing Lines — Wind/water currents
+   ======================================== */
+
+.ambient-flow {
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(142, 196, 176, 0.15) 20%,
+    rgba(142, 196, 176, 0.25) 50%,
+    rgba(142, 196, 176, 0.15) 80%,
+    transparent 100%
+  );
+  opacity: 0;
+  animation: flow 25s ease-in-out infinite;
+}
+
+.ambient-flow-1 {
+  top: 30%;
+  transform: rotate(-2deg);
+  animation-delay: 0s;
+}
+
+.ambient-flow-2 {
+  top: 55%;
+  transform: rotate(1deg);
+  animation-delay: -8s;
+  animation-duration: 30s;
+}
+
+.ambient-flow-3 {
+  top: 75%;
+  transform: rotate(-1deg);
+  animation-delay: -16s;
+  animation-duration: 35s;
+}
+
+@keyframes flow {
+  0%, 100% {
+    opacity: 0;
+    transform: translateX(-50%) scaleX(0.3);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translateX(0%) scaleX(1);
+  }
+}
+
+/* ========================================
+   Geometric Accents — Subtle circles
+   ======================================== */
+
+.ambient-circle {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(142, 196, 176, 0.08);
+  animation: breatheCircle 20s ease-in-out infinite;
+}
+
+.ambient-circle-1 {
+  width: 300px;
+  height: 300px;
+  top: 15%;
+  right: 10%;
+  animation-delay: 0s;
+}
+
+.ambient-circle-2 {
+  width: 180px;
+  height: 180px;
+  bottom: 25%;
+  left: 15%;
+  animation-delay: -7s;
+}
+
+.ambient-circle-3 {
+  width: 80px;
+  height: 80px;
+  top: 50%;
+  left: 60%;
+  animation-delay: -14s;
+}
+
+@keyframes breatheCircle {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.05);
+  }
+}
+
+/* ========================================
+   Noise Texture — Organic feel
+   ======================================== */
+
+.ambient-noise {
+  position: absolute;
+  inset: 0;
+  opacity: 0.025;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px;
+}
+
+/* ========================================
+   Vignette — Focus, depth
+   ======================================== */
+
+.ambient-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 70% 60% at center,
+    transparent 0%,
+    transparent 40%,
+    rgba(13, 14, 13, 0.5) 100%
+  );
+  pointer-events: none;
+}
+
+/* ========================================
+   Reduced Motion
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .ambient-form,
+  .ambient-flow,
+  .ambient-circle,
+  .ambient-bg::before {
+    animation: none;
+    opacity: 0.5;
+  }
+}

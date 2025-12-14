@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sanctuary</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/wisdom-banner.css">
+  <link rel="stylesheet" href="css/document-library.css">
+  <link rel="stylesheet" href="css/document-viewer.css">
+  <link rel="stylesheet" href="css/audio-player.css">
+  <link rel="stylesheet" href="css/ambient.css">
+</head>
+<body>
+  <!-- Ambient Background -->
+  <div id="ambient-background" class="ambient-bg"></div>
+
+  <!-- Wisdom Banner -->
+  <header id="wisdom-banner" class="wisdom-banner">
+    <div class="wisdom-content">
+      <span id="wisdom-text" class="wisdom-text"></span>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="main-container">
+    <!-- Welcome / Hero Section -->
+    <section id="welcome" class="welcome-section">
+      <h1 class="site-title">sanctuary</h1>
+      <p class="site-subtitle">one flow · no center · no edge</p>
+      <p class="site-description">
+        Explorations in consciousness, neuroscience, physics, and the architecture of experience.
+      </p>
+    </section>
+
+    <!-- Document Library -->
+    <section id="library" class="library-section">
+      <div class="library-header">
+        <h2 class="section-title">library</h2>
+        <div class="library-controls">
+          <button id="random-article-btn" class="btn btn-subtle">
+            <span class="btn-icon">◊</span>
+            wander
+          </button>
+        </div>
+      </div>
+      
+      <div id="document-list" class="document-list">
+        <!-- Documents populated by JS -->
+      </div>
+    </section>
+  </main>
+
+  <!-- Document Viewer Modal -->
+  <div id="document-viewer-overlay" class="viewer-overlay">
+    <div class="viewer-container">
+      <header class="viewer-header">
+        <h3 id="viewer-title" class="viewer-title">Document</h3>
+        <button id="viewer-close" class="viewer-close" aria-label="Close viewer">×</button>
+      </header>
+      <div id="viewer-content" class="viewer-content">
+        <!-- Document content loaded here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Audio Player (YouTube Background) -->
+  <div id="audio-player" class="audio-player">
+    <button id="audio-toggle" class="audio-toggle" aria-label="Toggle audio">
+      <span class="audio-icon" id="audio-icon">◦</span>
+    </button>
+    <input type="range" id="audio-volume" class="audio-volume" min="0" max="100" value="30">
+    <span class="audio-label">小久保隆 — 風のオアシス II</span>
+  </div>
+
+  <!-- Hidden YouTube iframe for audio -->
+  <div id="youtube-container" style="position:absolute;left:-9999px;"></div>
+
+  <!-- Scripts -->
+  <script src="js/config.js"></script>
+  <script src="js/wisdom-banner.js" type="module"></script>
+  <script src="js/document-library.js" type="module"></script>
+  <script src="js/document-viewer.js" type="module"></script>
+  <script src="js/audio-player.js" type="module"></script>
+  <script src="js/ambient.js" type="module"></script>
+  <script src="js/main.js" type="module"></script>
+</body>
+</html>

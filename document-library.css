@@ -1,0 +1,106 @@
+/* ========================================
+   Document Library
+   Simple list, quiet presence
+   ======================================== */
+
+.library-section {
+  padding: var(--space-xl) 0;
+}
+
+.library-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-xl);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid rgba(142, 196, 176, 0.08);
+}
+
+.library-controls {
+  display: flex;
+  gap: var(--space-md);
+}
+
+/* Document List */
+.document-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+/* Document Item — Minimal, contemplative */
+.document-item {
+  position: relative;
+  padding: var(--space-lg) 0;
+  background: transparent;
+  cursor: pointer;
+  transition: all var(--transition-slow);
+  border-bottom: 1px solid rgba(142, 196, 176, 0.05);
+}
+
+.document-item:first-child {
+  border-top: 1px solid rgba(142, 196, 176, 0.05);
+}
+
+.document-item::before {
+  content: '';
+  position: absolute;
+  left: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--water-mid);
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.document-item:hover {
+  padding-left: var(--space-md);
+}
+
+.document-item:hover::before {
+  opacity: 0.6;
+}
+
+/* Document Title — The only element */
+.document-title {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  transition: color var(--transition-normal);
+}
+
+.document-item:hover .document-title {
+  color: var(--text-primary);
+}
+
+/* Empty state */
+.document-list-empty {
+  text-align: center;
+  padding: var(--space-2xl) var(--space-lg);
+  color: var(--text-muted);
+}
+
+.document-list-empty p {
+  font-style: italic;
+}
+
+/* Loading state */
+.document-item.loading {
+  pointer-events: none;
+}
+
+.document-item.loading .document-title {
+  color: var(--text-muted);
+}
+
+/* Staggered entrance animation */
+.document-item {
+  opacity: 0;
+  transform: translateY(8px);
+  animation: fadeInSlow 0.8s ease forwards;
+}
